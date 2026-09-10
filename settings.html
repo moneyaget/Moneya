@@ -311,11 +311,19 @@
         }
 
         /* SAVE MESSAGE */
-        #statusMessage {
+        #statusMessage,
+        #currencyStatusMessage {
             margin-top: 12px;
             font-size: 13px;
-            color: #16a34a;
             display: none;
+        }
+
+        #statusMessage {
+            color: #16a34a;
+        }
+
+        #currencyStatusMessage {
+            color: #16a34a;
         }
 
         /* DANGER */
@@ -435,12 +443,14 @@
     <!-- PROFIL -->
     <div class="card">
         <h2>👤 Profil</h2>
+
         <p class="card-description">
             Informasi yang digunakan untuk akun MONEYA.
         </p>
 
         <div class="form-group">
             <label for="nama">Nama pengguna</label>
+
             <input
                 type="text"
                 id="nama"
@@ -450,6 +460,7 @@
 
         <div class="form-group">
             <label for="email">Email</label>
+
             <input
                 type="email"
                 id="email"
@@ -457,7 +468,10 @@
             >
         </div>
 
-        <button class="btn-primary" id="simpanProfil">
+        <button
+            class="btn-primary"
+            id="simpanProfil"
+        >
             Simpan Profil
         </button>
 
@@ -470,31 +484,57 @@
     <!-- MATA UANG -->
     <div class="card">
         <h2>💰 Mata Uang</h2>
+
         <p class="card-description">
             Pilih mata uang yang digunakan untuk menampilkan nominal.
         </p>
 
         <div class="form-group">
-            <label for="mataUang">Mata uang</label>
+            <label for="mataUang">
+                Mata uang
+            </label>
 
             <select id="mataUang">
-                <option value="IDR">Rupiah (Rp)</option>
-                <option value="USD">Dollar Amerika ($)</option>
-                <option value="EUR">Euro (€)</option>
-                <option value="MYR">Ringgit Malaysia (RM)</option>
-                <option value="SGD">Dollar Singapura (S$)</option>
+                <option value="IDR">
+                    Rupiah (Rp)
+                </option>
+
+                <option value="USD">
+                    Dollar Amerika ($)
+                </option>
+
+                <option value="EUR">
+                    Euro (€)
+                </option>
+
+                <option value="MYR">
+                    Ringgit Malaysia (RM)
+                </option>
+
+                <option value="SGD">
+                    Dollar Singapura (S$)
+                </option>
             </select>
         </div>
 
-        <button class="btn-primary" id="simpanMataUang">
+        <button
+            class="btn-primary"
+            id="simpanMataUang"
+        >
             Simpan Mata Uang
         </button>
+
+        <!-- STATUS KHUSUS MATA UANG -->
+        <div id="currencyStatusMessage">
+            Mata uang berhasil disimpan.
+        </div>
     </div>
 
 
     <!-- TEMA -->
     <div class="card">
         <h2>🎨 Tampilan</h2>
+
         <p class="card-description">
             Pilih tampilan MONEYA.
         </p>
@@ -506,8 +546,13 @@
                 id="themeLight"
                 data-theme="light"
             >
-                <div class="theme-icon">☀️</div>
-                <strong>Terang</strong>
+                <div class="theme-icon">
+                    ☀️
+                </div>
+
+                <strong>
+                    Terang
+                </strong>
             </div>
 
             <div
@@ -515,8 +560,13 @@
                 id="themeDark"
                 data-theme="dark"
             >
-                <div class="theme-icon">🌙</div>
-                <strong>Gelap</strong>
+                <div class="theme-icon">
+                    🌙
+                </div>
+
+                <strong>
+                    Gelap
+                </strong>
             </div>
 
         </div>
@@ -526,6 +576,7 @@
     <!-- NOTIFIKASI -->
     <div class="card">
         <h2>🔔 Notifikasi</h2>
+
         <p class="card-description">
             Atur pengingat untuk membantu mengelola keuangan.
         </p>
@@ -533,15 +584,26 @@
         <div class="setting-row">
 
             <div class="setting-info">
-                <strong>Pengingat transaksi</strong>
+
+                <strong>
+                    Pengingat transaksi
+                </strong>
+
                 <span>
                     Mengaktifkan pengingat pencatatan transaksi.
                 </span>
+
             </div>
 
             <label class="switch">
-                <input type="checkbox" id="notifikasi">
+
+                <input
+                    type="checkbox"
+                    id="notifikasi"
+                >
+
                 <span class="slider"></span>
+
             </label>
 
         </div>
@@ -551,7 +613,9 @@
     <!-- KATEGORI -->
     <div class="card">
 
-        <h2>📂 Kategori Transaksi</h2>
+        <h2>
+            📂 Kategori Transaksi
+        </h2>
 
         <p class="card-description">
             Kelola kategori yang tersedia untuk transaksi.
@@ -584,7 +648,10 @@
 
     <!-- AKUN -->
     <div class="card">
-        <h2>🔐 Akun</h2>
+
+        <h2>
+            🔐 Akun
+        </h2>
 
         <p class="card-description">
             Informasi akun yang sedang digunakan.
@@ -593,13 +660,27 @@
         <div class="account-info">
 
             <div>
-                <div class="account-label">Email akun</div>
-                <div id="accountEmail">-</div>
+
+                <div class="account-label">
+                    Email akun
+                </div>
+
+                <div id="accountEmail">
+                    -
+                </div>
+
             </div>
 
             <div>
-                <div class="account-label">User ID</div>
-                <div id="accountUid">-</div>
+
+                <div class="account-label">
+                    User ID
+                </div>
+
+                <div id="accountUid">
+                    -
+                </div>
+
             </div>
 
         </div>
@@ -617,7 +698,9 @@
     <!-- INFORMASI -->
     <div class="card">
 
-        <h2>ℹ️ Tentang MONEYA</h2>
+        <h2>
+            ℹ️ Tentang MONEYA
+        </h2>
 
         <p class="card-description">
             MONEYA adalah aplikasi pencatatan keuangan pribadi
@@ -636,15 +719,29 @@
 
 <script type="module">
 
+    // ==========================================
+    // FIREBASE APP
+    // ==========================================
+
     import {
         initializeApp
     } from "https://www.gstatic.com/firebasejs/12.18.0/firebase-app.js";
+
+
+    // ==========================================
+    // FIREBASE AUTH
+    // ==========================================
 
     import {
         getAuth,
         onAuthStateChanged,
         signOut
     } from "https://www.gstatic.com/firebasejs/12.18.0/firebase-auth.js";
+
+
+    // ==========================================
+    // FIRESTORE
+    // ==========================================
 
     import {
         getFirestore,
@@ -669,14 +766,17 @@
 
 
     // ==========================================
-    // FIREBASE
+    // FIREBASE INITIALIZE
     // ==========================================
 
-    const app = initializeApp(firebaseConfig);
+    const app =
+        initializeApp(firebaseConfig);
 
-    const auth = getAuth(app);
+    const auth =
+        getAuth(app);
 
-    const db = getFirestore(app);
+    const db =
+        getFirestore(app);
 
 
     // ==========================================
@@ -697,6 +797,11 @@
 
     const statusMessage =
         document.getElementById("statusMessage");
+
+    const currencyStatusMessage =
+        document.getElementById(
+            "currencyStatusMessage"
+        );
 
     const categoryList =
         document.getElementById("categoryList");
@@ -723,42 +828,60 @@
     ];
 
 
+    // ==========================================
+    // VARIABLES
+    // ==========================================
+
     let currentUser = null;
 
-    let categories = [...defaultCategories];
+    let categories =
+        [...defaultCategories];
 
 
     // ==========================================
-    // AUTH
+    // AUTH STATE
     // ==========================================
 
-    onAuthStateChanged(auth, async (user) => {
+    onAuthStateChanged(
+        auth,
+        async (user) => {
 
-        if (!user) {
+            if (!user) {
 
-            window.location.href = "login.html";
+                window.location.href =
+                    "login.html";
 
-            return;
+                return;
+            }
+
+
+            currentUser = user;
+
+
+            // EMAIL
+            emailInput.value =
+                user.email || "";
+
+
+            // ACCOUNT EMAIL
+            document.getElementById(
+                "accountEmail"
+            ).textContent =
+                user.email || "-";
+
+
+            // USER ID
+            document.getElementById(
+                "accountUid"
+            ).textContent =
+                user.uid;
+
+
+            // LOAD SETTINGS
+            await loadSettings();
+
         }
-
-        currentUser = user;
-
-        emailInput.value =
-            user.email || "";
-
-        document.getElementById(
-            "accountEmail"
-        ).textContent =
-            user.email || "-";
-
-        document.getElementById(
-            "accountUid"
-        ).textContent =
-            user.uid;
-
-        await loadSettings();
-
-    });
+    );
 
 
     // ==========================================
@@ -769,11 +892,13 @@
 
         try {
 
-            const userRef = doc(
-                db,
-                "users",
-                currentUser.uid
-            );
+            const userRef =
+                doc(
+                    db,
+                    "users",
+                    currentUser.uid
+                );
+
 
             const snapshot =
                 await getDoc(userRef);
@@ -785,6 +910,7 @@
                     snapshot.data();
 
 
+                // NAMA
                 if (data.nama) {
 
                     namaInput.value =
@@ -793,6 +919,7 @@
                 }
 
 
+                // MATA UANG
                 if (data.mataUang) {
 
                     mataUang.value =
@@ -801,7 +928,11 @@
                 }
 
 
-                if (typeof data.notifikasi === "boolean") {
+                // NOTIFIKASI
+                if (
+                    typeof data.notifikasi
+                    === "boolean"
+                ) {
 
                     notifikasi.checked =
                         data.notifikasi;
@@ -809,6 +940,7 @@
                 }
 
 
+                // KATEGORI
                 if (
                     Array.isArray(
                         data.kategori
@@ -822,7 +954,10 @@
                 }
 
 
-                if (data.tema === "dark") {
+                // TEMA
+                if (
+                    data.tema === "dark"
+                ) {
 
                     setTheme("dark");
 
@@ -855,16 +990,19 @@
     // SAVE SETTINGS
     // ==========================================
 
-    async function saveSettings(extra = {}) {
+    async function saveSettings(
+        extra = {}
+    ) {
 
         if (!currentUser) return;
 
 
-        const userRef = doc(
-            db,
-            "users",
-            currentUser.uid
-        );
+        const userRef =
+            doc(
+                db,
+                "users",
+                currentUser.uid
+            );
 
 
         await setDoc(
@@ -906,13 +1044,16 @@
 
                 await saveSettings();
 
+
                 showStatus(
                     "Profil berhasil disimpan."
                 );
 
+
             } catch (error) {
 
                 console.error(error);
+
 
                 showStatus(
                     "Gagal menyimpan profil.",
@@ -939,15 +1080,20 @@
 
                 await saveSettings();
 
-                showStatus(
+
+                // STATUS MATA UANG
+                showCurrencyStatus(
                     "Mata uang berhasil disimpan."
                 );
+
 
             } catch (error) {
 
                 console.error(error);
 
-                showStatus(
+
+                // STATUS ERROR MATA UANG
+                showCurrencyStatus(
                     "Gagal menyimpan mata uang.",
                     true
                 );
@@ -959,7 +1105,7 @@
 
 
     // ==========================================
-    // STATUS
+    // PROFILE STATUS
     // ==========================================
 
     function showStatus(
@@ -970,21 +1116,62 @@
         statusMessage.textContent =
             message;
 
+
         statusMessage.style.color =
             error
                 ? "#dc2626"
                 : "#16a34a";
 
+
         statusMessage.style.display =
             "block";
 
 
-        setTimeout(() => {
+        setTimeout(
+            () => {
 
-            statusMessage.style.display =
-                "none";
+                statusMessage.style.display =
+                    "none";
 
-        }, 3000);
+            },
+            3000
+        );
+
+    }
+
+
+    // ==========================================
+    // CURRENCY STATUS
+    // ==========================================
+
+    function showCurrencyStatus(
+        message,
+        error = false
+    ) {
+
+        currencyStatusMessage.textContent =
+            message;
+
+
+        currencyStatusMessage.style.color =
+            error
+                ? "#dc2626"
+                : "#16a34a";
+
+
+        currencyStatusMessage.style.display =
+            "block";
+
+
+        setTimeout(
+            () => {
+
+                currencyStatusMessage.style.display =
+                    "none";
+
+            },
+            3000
+        );
 
     }
 
@@ -1026,15 +1213,19 @@
 
     function setTheme(theme) {
 
-        if (theme === "dark") {
+        if (
+            theme === "dark"
+        ) {
 
             document.body.classList.add(
                 "dark"
             );
 
+
             themeDark.classList.add(
                 "active"
             );
+
 
             themeLight.classList.remove(
                 "active"
@@ -1046,9 +1237,11 @@
                 "dark"
             );
 
+
             themeLight.classList.add(
                 "active"
             );
+
 
             themeDark.classList.remove(
                 "active"
@@ -1061,14 +1254,16 @@
 
             saveSettings({
                 tema: theme
-            }).catch(error => {
+            }).catch(
+                error => {
 
-                console.error(
-                    "Gagal menyimpan tema:",
-                    error
-                );
+                    console.error(
+                        "Gagal menyimpan tema:",
+                        error
+                    );
 
-            });
+                }
+            );
 
         }
 
@@ -1114,6 +1309,7 @@
                         "div"
                     );
 
+
                 item.className =
                     "category-item";
 
@@ -1123,8 +1319,10 @@
                         "span"
                     );
 
+
                 name.className =
                     "category-name";
+
 
                 name.textContent =
                     category;
@@ -1135,8 +1333,10 @@
                         "button"
                     );
 
+
                 button.className =
                     "category-delete";
+
 
                 button.textContent =
                     "Hapus";
@@ -1154,9 +1354,15 @@
                 );
 
 
-                item.appendChild(name);
+                item.appendChild(
+                    name
+                );
 
-                item.appendChild(button);
+
+                item.appendChild(
+                    button
+                );
+
 
                 categoryList.appendChild(
                     item
@@ -1225,13 +1431,16 @@
 
                 await saveSettings();
 
+
                 showStatus(
                     "Kategori berhasil ditambahkan."
                 );
 
+
             } catch (error) {
 
                 console.error(error);
+
 
                 showStatus(
                     "Kategori ditambahkan tetapi gagal disimpan.",
@@ -1255,7 +1464,9 @@
 
 
         // Jangan hapus kategori Lainnya
-        if (category === "Lainnya") {
+        if (
+            category === "Lainnya"
+        ) {
 
             alert(
                 'Kategori "Lainnya" tidak dapat dihapus.'
@@ -1292,13 +1503,16 @@
 
             await saveSettings();
 
+
             showStatus(
                 "Kategori berhasil dihapus."
             );
 
+
         } catch (error) {
 
             console.error(error);
+
 
             showStatus(
                 "Gagal menyimpan perubahan kategori.",
@@ -1359,12 +1573,15 @@
 
                 await signOut(auth);
 
+
                 window.location.href =
                     "index.html";
+
 
             } catch (error) {
 
                 console.error(error);
+
 
                 alert(
                     "Gagal logout."

@@ -4,40 +4,646 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>MONEYA</title>
+    <title>MONEYA — Catat Keuanganmu</title>
 
-    <link rel="stylesheet" href="style.css">
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+            background: #f7f8fa;
+            color: #20242a;
+        }
+
+        /* NAVBAR */
+        nav {
+            height: 70px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 7%;
+            background: white;
+            border-bottom: 1px solid #eee;
+        }
+
+        .logo {
+            font-size: 22px;
+            font-weight: 700;
+            letter-spacing: -0.5px;
+        }
+
+        .nav-login {
+            text-decoration: none;
+            color: #20242a;
+            font-size: 14px;
+            font-weight: 600;
+            padding: 9px 17px;
+            border: 1px solid #d8dadd;
+            border-radius: 7px;
+        }
+
+        .nav-login:hover {
+            background: #f1f2f4;
+        }
+
+        /* HERO */
+        .hero {
+            max-width: 1050px;
+            margin: auto;
+            min-height: 570px;
+            padding: 90px 7% 70px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 60px;
+        }
+
+        .hero-text {
+            max-width: 540px;
+        }
+
+        .small-title {
+            font-size: 13px;
+            font-weight: 600;
+            color: #3867d6;
+            margin-bottom: 18px;
+            letter-spacing: 0.3px;
+        }
+
+        .hero h1 {
+            font-size: 52px;
+            line-height: 1.08;
+            letter-spacing: -2px;
+            margin-bottom: 20px;
+        }
+
+        .hero h1 span {
+            color: #3867d6;
+        }
+
+        .hero p {
+            color: #666d75;
+            font-size: 16px;
+            line-height: 1.7;
+            max-width: 480px;
+            margin-bottom: 30px;
+        }
+
+        .buttons {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .btn-main {
+            display: inline-block;
+            text-decoration: none;
+            background: #3867d6;
+            color: white;
+            padding: 13px 22px;
+            border-radius: 7px;
+            font-size: 14px;
+            font-weight: 600;
+        }
+
+        .btn-main:hover {
+            background: #2f56b8;
+        }
+
+        .btn-secondary {
+            display: inline-block;
+            text-decoration: none;
+            color: #444;
+            padding: 13px 18px;
+            font-size: 14px;
+            font-weight: 600;
+        }
+
+        /* SIMPLE DASHBOARD PREVIEW */
+        .preview {
+            width: 390px;
+            flex-shrink: 0;
+        }
+
+        .phone-card {
+            background: white;
+            border: 1px solid #e2e4e7;
+            border-radius: 16px;
+            padding: 20px;
+            box-shadow: 0 18px 45px rgba(0, 0, 0, 0.08);
+        }
+
+        .preview-top {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 22px;
+        }
+
+        .preview-title {
+            font-weight: 700;
+            font-size: 16px;
+        }
+
+        .preview-date {
+            color: #8a9097;
+            font-size: 11px;
+        }
+
+        .balance-label {
+            font-size: 12px;
+            color: #858b93;
+            margin-bottom: 5px;
+        }
+
+        .balance {
+            font-size: 29px;
+            font-weight: 700;
+            margin-bottom: 20px;
+        }
+
+        .mini-stats {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+
+        .stat {
+            flex: 1;
+            background: #f7f8fa;
+            padding: 12px;
+            border-radius: 9px;
+        }
+
+        .stat small {
+            display: block;
+            color: #888f97;
+            font-size: 10px;
+            margin-bottom: 6px;
+        }
+
+        .stat strong {
+            font-size: 13px;
+        }
+
+        .income {
+            color: #239b56;
+        }
+
+        .expense {
+            color: #d34b4b;
+        }
+
+        .transactions-title {
+            font-size: 13px;
+            font-weight: 700;
+            margin-bottom: 10px;
+        }
+
+        .transaction {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 11px 0;
+            border-bottom: 1px solid #f0f1f2;
+        }
+
+        .transaction:last-child {
+            border-bottom: none;
+        }
+
+        .transaction-left {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .icon {
+            width: 31px;
+            height: 31px;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: #f1f3f6;
+            font-size: 14px;
+        }
+
+        .transaction-name {
+            font-size: 12px;
+            font-weight: 600;
+        }
+
+        .transaction-date {
+            font-size: 10px;
+            color: #999fa6;
+            margin-top: 3px;
+        }
+
+        .amount {
+            font-size: 12px;
+            font-weight: 600;
+        }
+
+        /* FEATURES */
+        .features {
+            background: white;
+            border-top: 1px solid #eee;
+            border-bottom: 1px solid #eee;
+            padding: 55px 7%;
+        }
+
+        .features-inner {
+            max-width: 1050px;
+            margin: auto;
+        }
+
+        .features-title {
+            text-align: center;
+            margin-bottom: 35px;
+        }
+
+        .features-title h2 {
+            font-size: 25px;
+            margin-bottom: 8px;
+        }
+
+        .features-title p {
+            color: #777;
+            font-size: 14px;
+        }
+
+        .feature-list {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 18px;
+        }
+
+        .feature {
+            padding: 22px;
+            border: 1px solid #e6e7e9;
+            border-radius: 11px;
+            background: #fafafa;
+        }
+
+        .feature-icon {
+            font-size: 23px;
+            margin-bottom: 13px;
+        }
+
+        .feature h3 {
+            font-size: 15px;
+            margin-bottom: 8px;
+        }
+
+        .feature p {
+            color: #737980;
+            font-size: 13px;
+            line-height: 1.6;
+        }
+
+        /* FOOTER */
+        footer {
+            text-align: center;
+            padding: 28px 15px;
+            color: #8a9097;
+            font-size: 12px;
+        }
+
+        /* MOBILE */
+        @media (max-width: 800px) {
+
+            nav {
+                padding: 0 20px;
+            }
+
+            .hero {
+                min-height: auto;
+                padding: 65px 20px 60px;
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 45px;
+            }
+
+            .hero h1 {
+                font-size: 40px;
+                letter-spacing: -1.5px;
+            }
+
+            .hero p {
+                font-size: 15px;
+            }
+
+            .preview {
+                width: 100%;
+                max-width: 390px;
+                align-self: center;
+            }
+
+            .feature-list {
+                grid-template-columns: 1fr;
+            }
+
+            .features {
+                padding: 45px 20px;
+            }
+        }
+
+        @media (max-width: 430px) {
+
+            .hero h1 {
+                font-size: 35px;
+            }
+
+            .buttons {
+                flex-direction: column;
+                align-items: stretch;
+            }
+
+            .btn-main {
+                text-align: center;
+            }
+
+            .btn-secondary {
+                text-align: center;
+            }
+
+            .phone-card {
+                padding: 17px;
+            }
+        }
+    </style>
 </head>
 
 <body>
 
-    <h1>MONEYA</h1>
+    <!-- NAVBAR -->
+    <nav>
+        <div class="logo">MONEYA</div>
 
-    <p>Kenali perjalanan uangmu.</p>
+        <a href="login.html" class="nav-login">
+            Masuk
+        </a>
+    </nav>
 
-    <h2>Selamat datang 👋</h2>
 
-   <div class="button-menu">
+    <!-- HERO -->
+    <section class="hero">
 
-    <a href="login.html">
-        <button>Login</button>
-    </a>
+        <div class="hero-text">
 
-    <a href="daftar.html">
-        <button>Daftar</button>
-    </a>
+            <div class="small-title">
+                PENCATATAN KEUANGAN PRIBADI
+            </div>
 
-   </div>
+            <h1>
+                Tahu ke mana<br>
+                uangmu <span>pergi.</span>
+            </h1>
 
-    <script>
-        function login() {
-            alert("Halaman Login MONEYA");
-        }
+            <p>
+                MONEYA membantu kamu mencatat pemasukan dan
+                pengeluaran dengan cara yang sederhana. Tidak
+                perlu rumit, cukup catat dan lihat perkembangannya.
+            </p>
 
-        function daftar() {
-            alert("Halaman Daftar MONEYA");
-        }
-    </script>
+            <div class="buttons">
+
+                <a href="login.html" class="btn-main">
+                    Mulai menggunakan
+                </a>
+
+                <a href="register.html" class="btn-secondary">
+                    Buat akun
+                </a>
+
+            </div>
+
+        </div>
+
+
+        <!-- DASHBOARD PREVIEW -->
+        <div class="preview">
+
+            <div class="phone-card">
+
+                <div class="preview-top">
+
+                    <div class="preview-title">
+                        Ringkasan
+                    </div>
+
+                    <div class="preview-date">
+                        September 2026
+                    </div>
+
+                </div>
+
+                <div class="balance-label">
+                    Saldo saat ini
+                </div>
+
+                <div class="balance">
+                    Rp 2.450.000
+                </div>
+
+                <div class="mini-stats">
+
+                    <div class="stat">
+                        <small>PEMASUKAN</small>
+                        <strong class="income">
+                            Rp 3.500.000
+                        </strong>
+                    </div>
+
+                    <div class="stat">
+                        <small>PENGELUARAN</small>
+                        <strong class="expense">
+                            Rp 1.050.000
+                        </strong>
+                    </div>
+
+                </div>
+
+                <div class="transactions-title">
+                    Transaksi terakhir
+                </div>
+
+                <div class="transaction">
+
+                    <div class="transaction-left">
+
+                        <div class="icon">
+                            🍜
+                        </div>
+
+                        <div>
+                            <div class="transaction-name">
+                                Makan
+                            </div>
+
+                            <div class="transaction-date">
+                                Hari ini
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <div class="amount expense">
+                        - Rp 25.000
+                    </div>
+
+                </div>
+
+
+                <div class="transaction">
+
+                    <div class="transaction-left">
+
+                        <div class="icon">
+                            💵
+                        </div>
+
+                        <div>
+                            <div class="transaction-name">
+                                Uang saku
+                            </div>
+
+                            <div class="transaction-date">
+                                Kemarin
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <div class="amount income">
+                        + Rp 100.000
+                    </div>
+
+                </div>
+
+
+                <div class="transaction">
+
+                    <div class="transaction-left">
+
+                        <div class="icon">
+                            🚌
+                        </div>
+
+                        <div>
+                            <div class="transaction-name">
+                                Transportasi
+                            </div>
+
+                            <div class="transaction-date">
+                                Kemarin
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <div class="amount expense">
+                        - Rp 15.000
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- FEATURES -->
+    <section class="features">
+
+        <div class="features-inner">
+
+            <div class="features-title">
+
+                <h2>
+                    Semua yang kamu butuhkan
+                </h2>
+
+                <p>
+                    Dibuat sederhana supaya mudah digunakan setiap hari.
+                </p>
+
+            </div>
+
+
+            <div class="feature-list">
+
+                <div class="feature">
+
+                    <div class="feature-icon">
+                        📝
+                    </div>
+
+                    <h3>
+                        Catat transaksi
+                    </h3>
+
+                    <p>
+                        Simpan pemasukan dan pengeluaran
+                        tanpa langkah yang berbelit-belit.
+                    </p>
+
+                </div>
+
+
+                <div class="feature">
+
+                    <div class="feature-icon">
+                        📊
+                    </div>
+
+                    <h3>
+                        Lihat statistik
+                    </h3>
+
+                    <p>
+                        Pantau kondisi keuangan melalui
+                        ringkasan dan grafik yang mudah dibaca.
+                    </p>
+
+                </div>
+
+
+                <div class="feature">
+
+                    <div class="feature-icon">
+                        ⚙️
+                    </div>
+
+                    <h3>
+                        Sesuaikan sendiri
+                    </h3>
+
+                    <p>
+                        Atur profil, kategori, mata uang,
+                        dan tampilan sesuai kebutuhanmu.
+                    </p>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- FOOTER -->
+    <footer>
+        © 2026 MONEYA · Pencatatan keuangan pribadi
+    </footer>
 
 </body>
 </html>

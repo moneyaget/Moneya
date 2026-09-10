@@ -1,0 +1,392 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Daftar - MONEYA</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background: #f4f6f8;
+            color: #222;
+            min-height: 100vh;
+            padding: 30px 20px;
+        }
+
+        .daftar-box {
+            max-width: 400px;
+            margin: 50px auto;
+            background: white;
+            padding: 30px;
+            border-radius: 20px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.08);
+        }
+
+        h1 {
+            text-align: center;
+            font-size: 36px;
+            margin-bottom: 10px;
+        }
+
+        .subtitle {
+            text-align: center;
+            color: #666;
+            margin-bottom: 25px;
+            font-size: 20px;
+        }
+
+        .google {
+            width: 100%;
+            padding: 14px;
+            border: 1px solid #ddd;
+            border-radius: 10px;
+            background: white;
+            color: #222;
+            font-size: 16px;
+            cursor: pointer;
+        }
+
+        .atau {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin: 22px 0;
+            color: #888;
+            font-size: 14px;
+        }
+
+        .atau::before,
+        .atau::after {
+            content: "";
+            height: 1px;
+            background: #ddd;
+            flex: 1;
+        }
+
+        label {
+            display: block;
+            font-weight: bold;
+            margin-bottom: 8px;
+        }
+
+        input {
+            width: 100%;
+            padding: 14px;
+            margin-bottom: 20px;
+            border: 1px solid #ddd;
+            border-radius: 10px;
+            font-size: 16px;
+        }
+
+        .daftar {
+            width: 100%;
+            padding: 14px;
+            border: none;
+            border-radius: 10px;
+            background: #222;
+            color: white;
+            font-size: 16px;
+            cursor: pointer;
+        }
+
+        button:disabled {
+            opacity: 0.6;
+        }
+
+        #pesan {
+            margin-top: 15px;
+            text-align: center;
+            font-size: 14px;
+        }
+
+        .back {
+            display: block;
+            text-align: center;
+            margin-top: 20px;
+            color: #666;
+            text-decoration: none;
+        }
+    </style>
+</head>
+
+
+<body>
+
+    <div class="daftar-box">
+
+        <h1>MONEYA</h1>
+
+        <p class="subtitle">
+            Buat akun baru
+        </p>
+
+
+        <!-- GOOGLE -->
+
+        <button
+            type="button"
+            class="google"
+            id="googleButton">
+
+            🔵 Lanjut dengan Google
+
+        </button>
+
+
+        <div class="atau">
+            atau
+        </div>
+
+
+        <!-- EMAIL -->
+
+        <form id="formDaftar">
+
+            <label for="nama">
+                Nama
+            </label>
+
+            <input
+                type="text"
+                id="nama"
+                placeholder="Masukkan nama"
+                required
+            >
+
+
+            <label for="email">
+                Email
+            </label>
+
+            <input
+                type="email"
+                id="email"
+                placeholder="Masukkan email"
+                required
+            >
+
+
+            <label for="password">
+                Password
+            </label>
+
+            <input
+                type="password"
+                id="password"
+                placeholder="Buat password"
+                minlength="6"
+                required
+            >
+
+
+            <button
+                type="submit"
+                class="daftar"
+                id="tombolDaftar">
+
+                Daftar
+
+            </button>
+
+        </form>
+
+
+        <p id="pesan"></p>
+
+
+        <a href="login.html" class="back">
+            Sudah punya akun? Login
+        </a>
+
+
+        <a href="index.html" class="back">
+            ← Kembali
+        </a>
+
+    </div>
+
+
+    <!-- FIREBASE -->
+
+    <script type="module">
+
+        import {
+            initializeApp
+        } from "https://www.gstatic.com/firebasejs/12.18.0/firebase-app.js";
+
+        import {
+            getAuth,
+            createUserWithEmailAndPassword,
+            updateProfile,
+            GoogleAuthProvider,
+            signInWithPopup
+        } from "https://www.gstatic.com/firebasejs/12.18.0/firebase-auth.js";
+
+
+        const firebaseConfig = {
+
+            apiKey: "AIzaSyCNv4-7NC8n-voTkDGU--6O2VL9ZrDTByM",
+
+            authDomain:
+                "moneya-b1511.firebaseapp.com",
+
+            projectId:
+                "moneya-b1511",
+
+            storageBucket:
+                "moneya-b1511.firebasestorage.app",
+
+            messagingSenderId:
+                "325690102280",
+
+            appId:
+                "1:325690102280:web:67f978a652b25444a1f7bd"
+        };
+
+
+        const app =
+            initializeApp(firebaseConfig);
+
+        const auth =
+            getAuth(app);
+
+        const googleProvider =
+            new GoogleAuthProvider();
+
+
+        const pesan =
+            document.getElementById("pesan");
+
+
+        /* =========================
+           GOOGLE
+        ========================= */
+
+        document
+            .getElementById("googleButton")
+            .addEventListener(
+                "click",
+                async function() {
+
+                    try {
+
+                        await signInWithPopup(
+                            auth,
+                            googleProvider
+                        );
+
+                        window.location.href =
+                            "dashboard.html";
+
+                    } catch (error) {
+
+                        pesan.textContent =
+                            "Google gagal: " +
+                            error.message;
+
+                    }
+
+                }
+            );
+
+
+        /* =========================
+           EMAIL
+        ========================= */
+
+        document
+            .getElementById("formDaftar")
+            .addEventListener(
+                "submit",
+                async function(event) {
+
+                    event.preventDefault();
+
+
+                    const nama =
+                        document
+                        .getElementById("nama")
+                        .value
+                        .trim();
+
+
+                    const email =
+                        document
+                        .getElementById("email")
+                        .value
+                        .trim();
+
+
+                    const password =
+                        document
+                        .getElementById("password")
+                        .value;
+
+
+                    try {
+
+                        const hasil =
+                            await createUserWithEmailAndPassword(
+                                auth,
+                                email,
+                                password
+                            );
+
+
+                        await updateProfile(
+                            hasil.user,
+                            {
+                                displayName: nama
+                            }
+                        );
+
+
+                        window.location.href =
+                            "dashboard.html";
+
+
+                    } catch (error) {
+
+                        if (
+                            error.code ===
+                            "auth/email-already-in-use"
+                        ) {
+
+                            pesan.textContent =
+                                "Email sudah terdaftar. Silakan Login.";
+
+                        } else if (
+                            error.code ===
+                            "auth/weak-password"
+                        ) {
+
+                            pesan.textContent =
+                                "Password minimal 6 karakter.";
+
+                        } else {
+
+                            pesan.textContent =
+                                "Gagal: " +
+                                error.message;
+
+                        }
+
+                    }
+
+                }
+            );
+
+    </script>
+
+</body>
+
+</html>

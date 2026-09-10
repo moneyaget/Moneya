@@ -272,31 +272,56 @@
         ========================= */
 
         document
-            .getElementById("googleButton")
-            .addEventListener(
-                "click",
-                async function() {
+    .getElementById("googleButton")
+    .addEventListener(
+        "click",
+        async function() {
 
-                    try {
+            const tombol =
+                document.getElementById("googleButton");
 
-                        await signInWithPopup(
-                            auth,
-                            googleProvider
-                        );
+            tombol.disabled = true;
+            tombol.textContent =
+                "Menghubungkan ke Google...";
 
-                        window.location.href =
-                            "dashboard.html";
+            pesan.textContent = "";
 
-                    } catch (error) {
+            try {
 
-                        pesan.textContent =
-                            "Google gagal: " +
-                            error.message;
+                await signInWithPopup(
+                    auth,
+                    googleProvider
+                );
 
-                    }
+                pesan.textContent =
+                    "Google berhasil!";
 
-                }
-            );
+                window.location.href =
+                    "dashboard.html";
+
+            } catch (error) {
+
+                tombol.disabled = false;
+
+                tombol.textContent =
+                    "🔵 Lanjut dengan Google";
+
+                pesan.textContent =
+                    "Kode: " +
+                    error.code +
+                    " | " +
+                    error.message;
+
+                console.error(
+                    "Google Sign-In Error:",
+                    error
+                );
+
+            }
+
+        }
+    );
+        
 
 
         /* =========================

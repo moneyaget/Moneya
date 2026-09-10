@@ -1,2 +1,0 @@
-# Moneya
-Aplikasi pencatatan keuangan 

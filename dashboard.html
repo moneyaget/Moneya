@@ -22,18 +22,46 @@
             color: #222;
         }
 
+        /* =========================
+           HEADER
+        ========================= */
+
         header {
             background: #111827;
             color: white;
-            padding: 18px 25px;
+            padding: 15px 25px;
             display: flex;
             justify-content: space-between;
             align-items: center;
+            gap: 15px;
         }
 
         .logo {
             font-size: 24px;
             font-weight: bold;
+        }
+
+        .header-right {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .settings-btn {
+            background: #374151;
+            color: white;
+            border: none;
+            padding: 9px 14px;
+            border-radius: 8px;
+            cursor: pointer;
+            text-decoration: none;
+            font-size: 13px;
+            font-weight: bold;
+            transition: 0.2s;
+        }
+
+        .settings-btn:hover {
+            background: #4b5563;
         }
 
         #logout {
@@ -43,11 +71,16 @@
             padding: 9px 16px;
             border-radius: 8px;
             cursor: pointer;
+            font-weight: bold;
         }
 
         #logout:hover {
             background: #dc2626;
         }
+
+        /* =========================
+           CONTAINER
+        ========================= */
 
         .container {
             width: 92%;
@@ -407,6 +440,28 @@
 
         @media (max-width: 600px) {
 
+            header {
+                padding: 14px 15px;
+            }
+
+            .logo {
+                font-size: 21px;
+            }
+
+            .header-right {
+                gap: 6px;
+            }
+
+            .settings-btn {
+                padding: 8px 10px;
+                font-size: 12px;
+            }
+
+            #logout {
+                padding: 8px 10px;
+                font-size: 12px;
+            }
+
             .container {
                 width: 94%;
             }
@@ -452,6 +507,27 @@
                 height: 250px;
             }
         }
+
+        @media (max-width: 380px) {
+
+            header {
+                padding: 12px;
+            }
+
+            .logo {
+                font-size: 19px;
+            }
+
+            .settings-btn {
+                font-size: 11px;
+                padding: 7px 8px;
+            }
+
+            #logout {
+                font-size: 11px;
+                padding: 7px 8px;
+            }
+        }
     </style>
 </head>
 
@@ -463,18 +539,29 @@
         MONEYA
     </div>
 
-    <button id="logout">
-        Logout
-    </button>
+    <div class="header-right">
+
+        <!-- MENU PENGATURAN -->
+        <a
+            href="settings.html"
+            class="settings-btn"
+        >
+            ⚙️ Pengaturan
+        </a>
+
+        <!-- LOGOUT -->
+        <button id="logout">
+            Logout
+        </button>
+
+    </div>
 
 </header>
 
 
 <div class="container">
 
-    <!-- =========================
-         WELCOME
-    ========================== -->
+    <!-- WELCOME -->
 
     <div class="welcome">
 
@@ -489,9 +576,7 @@
     </div>
 
 
-    <!-- =========================
-         SALDO
-    ========================== -->
+    <!-- SALDO -->
 
     <div class="saldo-card">
 
@@ -506,9 +591,7 @@
     </div>
 
 
-    <!-- =========================
-         STATISTIK
-    ========================== -->
+    <!-- STATISTIK -->
 
     <div class="stats-grid">
 
@@ -572,9 +655,7 @@
     </div>
 
 
-    <!-- =========================
-         GRAFIK
-    ========================== -->
+    <!-- GRAFIK -->
 
     <div class="chart-section">
 
@@ -590,9 +671,7 @@
 
             <div class="chart-wrapper">
 
-                <canvas
-                    id="chartKeuangan"
-                ></canvas>
+                <canvas id="chartKeuangan"></canvas>
 
             </div>
 
@@ -611,9 +690,7 @@
 
             <div class="chart-wrapper">
 
-                <canvas
-                    id="chartKategori"
-                ></canvas>
+                <canvas id="chartKategori"></canvas>
 
             </div>
 
@@ -622,9 +699,7 @@
     </div>
 
 
-    <!-- =========================
-         FORM
-    ========================== -->
+    <!-- FORM -->
 
     <div class="form-card">
 
@@ -753,9 +828,7 @@
     </div>
 
 
-    <!-- =========================
-         FILTER
-    ========================== -->
+    <!-- FILTER -->
 
     <div class="filter-card">
 
@@ -848,9 +921,7 @@
     </div>
 
 
-    <!-- =========================
-         RIWAYAT
-    ========================== -->
+    <!-- RIWAYAT -->
 
     <div class="history-card">
 
@@ -961,1384 +1032,4 @@
         document.getElementById("emailUser");
 
     const saldo =
-        document.getElementById("saldo");
-
-    const totalPemasukan =
-        document.getElementById("totalPemasukan");
-
-    const totalPengeluaran =
-        document.getElementById("totalPengeluaran");
-
-    const jumlahTransaksi =
-        document.getElementById("jumlahTransaksi");
-
-    const pengeluaranTerbesar =
-        document.getElementById("pengeluaranTerbesar");
-
-    const jenis =
-        document.getElementById("jenis");
-
-    const kategori =
-        document.getElementById("kategori");
-
-    const jumlah =
-        document.getElementById("jumlah");
-
-    const keterangan =
-        document.getElementById("keterangan");
-
-    const btnSimpan =
-        document.getElementById("btnSimpan");
-
-    const btnBatal =
-        document.getElementById("btnBatal");
-
-    const judulForm =
-        document.getElementById("judulForm");
-
-    const daftarTransaksi =
-        document.getElementById("daftarTransaksi");
-
-    const kosong =
-        document.getElementById("kosong");
-
-    const logout =
-        document.getElementById("logout");
-
-
-    // FILTER
-
-    const searchInput =
-        document.getElementById("searchInput");
-
-    const filterKategori =
-        document.getElementById("filterKategori");
-
-    const filterJenis =
-        document.getElementById("filterJenis");
-
-    const resetFilter =
-        document.getElementById("resetFilter");
-
-    const hasilFilter =
-        document.getElementById("hasilFilter");
-
-
-    // =========================
-    // VARIABLE
-    // =========================
-
-    let transaksiSedangDiedit = null;
-
-    let userSekarang = null;
-
-    let semuaTransaksi = [];
-
-    let chartKeuangan = null;
-
-    let chartKategori = null;
-
-
-    // =========================
-    // FORMAT RUPIAH
-    // =========================
-
-    function formatRupiah(angka) {
-
-        return new Intl.NumberFormat(
-            "id-ID",
-            {
-                style: "currency",
-                currency: "IDR",
-                minimumFractionDigits: 0
-            }
-        ).format(angka);
-
-    }
-
-
-    // =========================
-    // ESCAPE HTML
-    // =========================
-
-    function escapeHTML(text) {
-
-        if (
-            text === undefined ||
-            text === null
-        ) {
-            return "";
-        }
-
-        return String(text)
-            .replace(/&/g, "&amp;")
-            .replace(/</g, "&lt;")
-            .replace(/>/g, "&gt;")
-            .replace(/"/g, "&quot;")
-            .replace(/'/g, "&#039;");
-
-    }
-
-
-    // =========================
-    // LOGIN
-    // =========================
-
-    onAuthStateChanged(
-        auth,
-        (user) => {
-
-            if (!user) {
-
-                window.location.href =
-                    "login.html";
-
-                return;
-
-            }
-
-
-            userSekarang = user;
-
-            emailUser.textContent =
-                user.email;
-
-
-            tampilkanTransaksi();
-
-        }
-    );
-
-
-    // =========================
-    // SIMPAN / UPDATE
-    // =========================
-
-    btnSimpan.onclick =
-        async function () {
-
-            const jenisValue =
-                jenis.value;
-
-            const kategoriValue =
-                kategori.value;
-
-            const jumlahValue =
-                Number(jumlah.value);
-
-            const keteranganValue =
-                keterangan.value.trim();
-
-
-            if (
-                !jumlahValue ||
-                jumlahValue <= 0
-            ) {
-
-                alert(
-                    "Masukkan jumlah yang benar."
-                );
-
-                return;
-
-            }
-
-
-            if (!keteranganValue) {
-
-                alert(
-                    "Masukkan keterangan transaksi."
-                );
-
-                return;
-
-            }
-
-
-            try {
-
-                btnSimpan.disabled = true;
-
-
-                // EDIT
-
-                if (transaksiSedangDiedit) {
-
-                    await updateDoc(
-
-                        doc(
-                            db,
-                            "transaksi",
-                            transaksiSedangDiedit
-                        ),
-
-                        {
-                            jenis:
-                                jenisValue,
-
-                            kategori:
-                                kategoriValue,
-
-                            jumlah:
-                                jumlahValue,
-
-                            keterangan:
-                                keteranganValue
-                        }
-
-                    );
-
-
-                    alert(
-                        "Transaksi berhasil diperbarui."
-                    );
-
-
-                    batalEdit();
-
-                }
-
-
-                // TAMBAH
-
-                else {
-
-                    await addDoc(
-
-                        collection(
-                            db,
-                            "transaksi"
-                        ),
-
-                        {
-
-                            userId:
-                                userSekarang.uid,
-
-                            jenis:
-                                jenisValue,
-
-                            kategori:
-                                kategoriValue,
-
-                            jumlah:
-                                jumlahValue,
-
-                            keterangan:
-                                keteranganValue,
-
-                            tanggal:
-                                new Date().toISOString()
-
-                        }
-
-                    );
-
-
-                    alert(
-                        "Transaksi berhasil disimpan."
-                    );
-
-
-                    resetForm();
-
-                }
-
-
-                await tampilkanTransaksi();
-
-            }
-
-            catch (error) {
-
-                console.error(error);
-
-
-                alert(
-                    "Terjadi kesalahan: " +
-                    error.message
-                );
-
-            }
-
-            finally {
-
-                btnSimpan.disabled = false;
-
-            }
-
-        };
-
-
-    // =========================
-    // AMBIL DATA
-    // =========================
-
-    async function tampilkanTransaksi() {
-
-        if (!userSekarang) {
-            return;
-        }
-
-
-        try {
-
-            const q =
-                query(
-
-                    collection(
-                        db,
-                        "transaksi"
-                    ),
-
-                    where(
-                        "userId",
-                        "==",
-                        userSekarang.uid
-                    )
-
-                );
-
-
-            const snapshot =
-                await getDocs(q);
-
-
-            semuaTransaksi = [];
-
-
-            snapshot.forEach(
-                (docSnapshot) => {
-
-                    const data =
-                        docSnapshot.data();
-
-
-                    semuaTransaksi.push({
-
-                        id:
-                            docSnapshot.id,
-
-                        ...data
-
-                    });
-
-                }
-            );
-
-
-            // TERBARU DI ATAS
-
-            semuaTransaksi.sort(
-                (a, b) => {
-
-                    return (
-                        new Date(b.tanggal) -
-                        new Date(a.tanggal)
-                    );
-
-                }
-            );
-
-
-            hitungStatistik();
-
-            buatGrafik();
-
-            tampilkanHasilFilter();
-
-        }
-
-        catch (error) {
-
-            console.error(error);
-
-
-            alert(
-                "Gagal mengambil data transaksi: " +
-                error.message
-            );
-
-        }
-
-    }
-
-
-    // =========================
-    // STATISTIK
-    // =========================
-
-    function hitungStatistik() {
-
-        let pemasukan = 0;
-
-        let pengeluaran = 0;
-
-        let terbesar = 0;
-
-
-        semuaTransaksi.forEach(
-            (data) => {
-
-                const nilai =
-                    Number(data.jumlah) || 0;
-
-
-                if (
-                    data.jenis ===
-                    "pemasukan"
-                ) {
-
-                    pemasukan += nilai;
-
-                }
-
-                else {
-
-                    pengeluaran += nilai;
-
-
-                    if (
-                        nilai > terbesar
-                    ) {
-
-                        terbesar = nilai;
-
-                    }
-
-                }
-
-            }
-        );
-
-
-        const hasilSaldo =
-            pemasukan - pengeluaran;
-
-
-        saldo.textContent =
-            formatRupiah(hasilSaldo);
-
-
-        totalPemasukan.textContent =
-            formatRupiah(pemasukan);
-
-
-        totalPengeluaran.textContent =
-            formatRupiah(pengeluaran);
-
-
-        jumlahTransaksi.textContent =
-            semuaTransaksi.length;
-
-
-        pengeluaranTerbesar.textContent =
-            formatRupiah(terbesar);
-
-    }
-
-
-    // =========================
-    // BUAT GRAFIK
-    // =========================
-
-    function buatGrafik() {
-
-        // =========================
-        // DATA KEUANGAN
-        // =========================
-
-        let pemasukan = 0;
-
-        let pengeluaran = 0;
-
-
-        semuaTransaksi.forEach(
-            (data) => {
-
-                const nilai =
-                    Number(data.jumlah) || 0;
-
-
-                if (
-                    data.jenis ===
-                    "pemasukan"
-                ) {
-
-                    pemasukan += nilai;
-
-                }
-
-                else {
-
-                    pengeluaran += nilai;
-
-                }
-
-            }
-        );
-
-
-        // HANCURKAN GRAFIK LAMA
-
-        if (chartKeuangan) {
-
-            chartKeuangan.destroy();
-
-        }
-
-
-        // GRAFIK PEMASUKAN VS PENGELUARAN
-
-        const canvasKeuangan =
-            document.getElementById(
-                "chartKeuangan"
-            );
-
-
-        chartKeuangan =
-            new Chart(
-                canvasKeuangan,
-                {
-                    type: "bar",
-
-                    data: {
-
-                        labels: [
-                            "Pemasukan",
-                            "Pengeluaran"
-                        ],
-
-                        datasets: [
-
-                            {
-
-                                label:
-                                    "Jumlah",
-
-                                data: [
-                                    pemasukan,
-                                    pengeluaran
-                                ]
-
-                            }
-
-                        ]
-
-                    },
-
-                    options: {
-
-                        responsive: true,
-
-                        maintainAspectRatio:
-                            false,
-
-                        plugins: {
-
-                            legend: {
-                                display: false
-                            },
-
-                            tooltip: {
-
-                                callbacks: {
-
-                                    label:
-                                        function (
-                                            context
-                                        ) {
-
-                                            return (
-                                                " " +
-                                                formatRupiah(
-                                                    context.raw
-                                                )
-                                            );
-
-                                        }
-
-                                }
-
-                            }
-
-                        },
-
-                        scales: {
-
-                            y: {
-
-                                beginAtZero: true,
-
-                                ticks: {
-
-                                    callback:
-                                        function (
-                                            value
-                                        ) {
-
-                                            return formatRupiah(
-                                                value
-                                            );
-
-                                        }
-
-                                }
-
-                            }
-
-                        }
-
-                    }
-
-                }
-            );
-
-
-        // =========================
-        // KATEGORI PENGELUARAN
-        // =========================
-
-        const dataKategori = {};
-
-
-        semuaTransaksi.forEach(
-            (data) => {
-
-                if (
-                    data.jenis !==
-                    "pengeluaran"
-                ) {
-
-                    return;
-
-                }
-
-
-                const namaKategori =
-                    data.kategori ||
-                    "Lainnya";
-
-
-                const nilai =
-                    Number(data.jumlah) || 0;
-
-
-                if (
-                    !dataKategori[
-                        namaKategori
-                    ]
-                ) {
-
-                    dataKategori[
-                        namaKategori
-                    ] = 0;
-
-                }
-
-
-                dataKategori[
-                    namaKategori
-                ] += nilai;
-
-            }
-        );
-
-
-        const labelKategori =
-            Object.keys(
-                dataKategori
-            );
-
-
-        const nilaiKategori =
-            Object.values(
-                dataKategori
-            );
-
-
-        if (chartKategori) {
-
-            chartKategori.destroy();
-
-        }
-
-
-        const canvasKategori =
-            document.getElementById(
-                "chartKategori"
-            );
-
-
-        // JIKA BELUM ADA PENGELUARAN
-
-        if (
-            labelKategori.length === 0
-        ) {
-
-            chartKategori =
-                new Chart(
-                    canvasKategori,
-                    {
-                        type: "doughnut",
-
-                        data: {
-
-                            labels: [
-                                "Belum ada data"
-                            ],
-
-                            datasets: [
-
-                                {
-                                    data: [1]
-                                }
-
-                            ]
-
-                        },
-
-                        options: {
-
-                            responsive: true,
-
-                            maintainAspectRatio:
-                                false,
-
-                            plugins: {
-
-                                legend: {
-                                    display: true
-                                }
-
-                            }
-
-                        }
-
-                    }
-                );
-
-            return;
-
-        }
-
-
-        chartKategori =
-            new Chart(
-                canvasKategori,
-                {
-                    type: "doughnut",
-
-                    data: {
-
-                        labels:
-                            labelKategori,
-
-                        datasets: [
-
-                            {
-
-                                data:
-                                    nilaiKategori
-
-                            }
-
-                        ]
-
-                    },
-
-                    options: {
-
-                        responsive: true,
-
-                        maintainAspectRatio:
-                            false,
-
-                        plugins: {
-
-                            legend: {
-
-                                position:
-                                    "bottom"
-
-                            },
-
-                            tooltip: {
-
-                                callbacks: {
-
-                                    label:
-                                        function (
-                                            context
-                                        ) {
-
-                                            return (
-                                                " " +
-                                                context.label +
-                                                ": " +
-                                                formatRupiah(
-                                                    context.raw
-                                                )
-                                            );
-
-                                        }
-
-                                }
-
-                            }
-
-                        }
-
-                    }
-
-                }
-            );
-
-    }
-
-
-    // =========================
-    // FILTER
-    // =========================
-
-    function tampilkanHasilFilter() {
-
-        const kataKunci =
-            searchInput.value
-                .trim()
-                .toLowerCase();
-
-
-        const kategoriDipilih =
-            filterKategori.value;
-
-
-        const jenisDipilih =
-            filterJenis.value;
-
-
-        const hasil =
-            semuaTransaksi.filter(
-                (data) => {
-
-                    const teksKeterangan =
-                        (
-                            data.keterangan ||
-                            ""
-                        ).toLowerCase();
-
-
-                    const teksKategori =
-                        (
-                            data.kategori ||
-                            "Lainnya"
-                        ).toLowerCase();
-
-
-                    const cocokSearch =
-                        teksKeterangan.includes(
-                            kataKunci
-                        );
-
-
-                    const cocokKategori =
-                        kategoriDipilih ===
-                        "semua"
-
-                        ||
-
-                        teksKategori ===
-                        kategoriDipilih
-                            .toLowerCase();
-
-
-                    const cocokJenis =
-                        jenisDipilih ===
-                        "semua"
-
-                        ||
-
-                        data.jenis ===
-                        jenisDipilih;
-
-
-                    return (
-                        cocokSearch &&
-                        cocokKategori &&
-                        cocokJenis
-                    );
-
-                }
-            );
-
-
-        renderTransaksi(hasil);
-
-
-        if (
-            kataKunci === "" &&
-            kategoriDipilih === "semua" &&
-            jenisDipilih === "semua"
-        ) {
-
-            hasilFilter.textContent =
-                "Menampilkan semua transaksi.";
-
-        }
-
-        else {
-
-            hasilFilter.textContent =
-                `Menampilkan ${hasil.length} transaksi dari ${semuaTransaksi.length}.`;
-
-        }
-
-    }
-
-
-    // =========================
-    // RENDER TRANSAKSI
-    // =========================
-
-    function renderTransaksi(
-        dataTransaksi
-    ) {
-
-        daftarTransaksi.innerHTML =
-            "";
-
-
-        if (
-            dataTransaksi.length === 0
-        ) {
-
-            kosong.style.display =
-                "block";
-
-
-            if (
-                semuaTransaksi.length > 0
-            ) {
-
-                kosong.textContent =
-                    "Tidak ada transaksi yang sesuai dengan filter.";
-
-            }
-
-            else {
-
-                kosong.textContent =
-                    "Belum ada transaksi.";
-
-            }
-
-
-            return;
-
-        }
-
-
-        kosong.style.display =
-            "none";
-
-
-        dataTransaksi.forEach(
-            (data) => {
-
-                const nilai =
-                    Number(data.jumlah) || 0;
-
-
-                const item =
-                    document.createElement(
-                        "div"
-                    );
-
-
-                item.className =
-                    "transaksi";
-
-
-                const tanggal =
-                    data.tanggal
-
-                    ? new Date(
-                        data.tanggal
-                    ).toLocaleString(
-                        "id-ID"
-                    )
-
-                    : "-";
-
-
-                const kategoriData =
-                    data.kategori ||
-                    "Lainnya";
-
-
-                item.innerHTML = `
-
-                    <div class="transaksi-info">
-
-                        <h3>
-                            ${escapeHTML(
-                                data.keterangan
-                            )}
-                        </h3>
-
-                        <p>
-                            ${tanggal}
-                        </p>
-
-                        <span class="kategori">
-                            ${escapeHTML(
-                                kategoriData
-                            )}
-                        </span>
-
-                    </div>
-
-
-                    <div class="transaksi-kanan">
-
-                        <div class="jumlah ${
-                            data.jenis ===
-                            "pemasukan"
-                                ? "pemasukan"
-                                : "pengeluaran"
-                        }">
-
-                            ${
-                                data.jenis ===
-                                "pemasukan"
-                                    ? "+"
-                                    : "-"
-                            }
-
-                            ${formatRupiah(nilai)}
-
-                        </div>
-
-
-                        <div class="actions">
-
-                            <button
-                                class="btn-edit"
-                            >
-                                Edit
-                            </button>
-
-
-                            <button
-                                class="btn-hapus"
-                            >
-                                Hapus
-                            </button>
-
-                        </div>
-
-                    </div>
-
-                `;
-
-
-                // EDIT
-
-                const tombolEdit =
-                    item.querySelector(
-                        ".btn-edit"
-                    );
-
-
-                tombolEdit.onclick =
-                    function () {
-
-                        mulaiEdit(data);
-
-                    };
-
-
-                // HAPUS
-
-                const tombolHapus =
-                    item.querySelector(
-                        ".btn-hapus"
-                    );
-
-
-                tombolHapus.onclick =
-                    async function () {
-
-                        const yakin =
-                            confirm(
-                                "Apakah kamu yakin ingin menghapus transaksi ini?"
-                            );
-
-
-                        if (!yakin) {
-                            return;
-                        }
-
-
-                        try {
-
-                            await deleteDoc(
-
-                                doc(
-                                    db,
-                                    "transaksi",
-                                    data.id
-                                )
-
-                            );
-
-
-                            alert(
-                                "Transaksi berhasil dihapus."
-                            );
-
-
-                            await tampilkanTransaksi();
-
-                        }
-
-                        catch (error) {
-
-                            console.error(error);
-
-
-                            alert(
-                                "Gagal menghapus transaksi: " +
-                                error.message
-                            );
-
-                        }
-
-                    };
-
-
-                daftarTransaksi.appendChild(
-                    item
-                );
-
-            }
-        );
-
-    }
-
-
-    // =========================
-    // MULAI EDIT
-    // =========================
-
-    function mulaiEdit(data) {
-
-        transaksiSedangDiedit =
-            data.id;
-
-
-        jenis.value =
-            data.jenis ||
-            "pengeluaran";
-
-
-        kategori.value =
-            data.kategori ||
-            "Lainnya";
-
-
-        jumlah.value =
-            data.jumlah ||
-            "";
-
-
-        keterangan.value =
-            data.keterangan ||
-            "";
-
-
-        judulForm.textContent =
-            "Edit Transaksi";
-
-
-        btnSimpan.textContent =
-            "Simpan Perubahan";
-
-
-        btnBatal.style.display =
-            "block";
-
-
-        window.scrollTo({
-
-            top: 0,
-
-            behavior: "smooth"
-
-        });
-
-    }
-
-
-    // =========================
-    // BATAL EDIT
-    // =========================
-
-    function batalEdit() {
-
-        transaksiSedangDiedit =
-            null;
-
-
-        judulForm.textContent =
-            "Tambah Transaksi";
-
-
-        btnSimpan.textContent =
-            "Simpan Transaksi";
-
-
-        btnBatal.style.display =
-            "none";
-
-
-        resetForm();
-
-    }
-
-
-    // =========================
-    // RESET FORM
-    // =========================
-
-    function resetForm() {
-
-        jenis.value =
-            "pemasukan";
-
-
-        kategori.value =
-            "Gaji/Uang Saku";
-
-
-        jumlah.value =
-            "";
-
-
-        keterangan.value =
-            "";
-
-    }
-
-
-    // =========================
-    // BATAL EDIT
-    // =========================
-
-    btnBatal.onclick =
-        function () {
-
-            batalEdit();
-
-        };
-
-
-    // =========================
-    // SEARCH
-    // =========================
-
-    searchInput.addEventListener(
-        "input",
-        function () {
-
-            tampilkanHasilFilter();
-
-        }
-    );
-
-
-    // =========================
-    // FILTER KATEGORI
-    // =========================
-
-    filterKategori.addEventListener(
-        "change",
-        function () {
-
-            tampilkanHasilFilter();
-
-        }
-    );
-
-
-    // =========================
-    // FILTER JENIS
-    // =========================
-
-    filterJenis.addEventListener(
-        "change",
-        function () {
-
-            tampilkanHasilFilter();
-
-        }
-    );
-
-
-    // =========================
-    // RESET FILTER
-    // =========================
-
-    resetFilter.onclick =
-        function () {
-
-            searchInput.value =
-                "";
-
-            filterKategori.value =
-                "semua";
-
-            filterJenis.value =
-                "semua";
-
-
-            tampilkanHasilFilter();
-
-        };
-
-
-    // =========================
-    // LOGOUT
-    // =========================
-
-    logout.onclick =
-        async function () {
-
-            try {
-
-                await signOut(auth);
-
-
-                window.location.href =
-                    "index.html";
-
-            }
-
-            catch (error) {
-
-                console.error(error);
-
-
-                alert(
-                    "Gagal logout: " +
-                    error.message
-                );
-
-            }
-
-        };
-
-</script>
-
-</body>
-</html>
+        do

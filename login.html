@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Login - MONEYA</title>
+
+    <style>
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background: #f4f6f8;
+            color: #222;
+            min-height: 100vh;
+            padding: 30px 20px;
+        }
+
+        .login-box {
+            max-width: 400px;
+            margin: 60px auto;
+            background: white;
+            padding: 30px;
+            border-radius: 20px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.08);
+        }
+
+        h1 {
+            text-align: center;
+            font-size: 36px;
+            margin-bottom: 10px;
+        }
+
+        .subtitle {
+            text-align: center;
+            color: #666;
+            margin-bottom: 30px;
+            font-size: 20px;
+        }
+
+        label {
+            display: block;
+            font-weight: bold;
+            margin-bottom: 8px;
+        }
+
+        input {
+            width: 100%;
+            padding: 14px;
+            margin-bottom: 20px;
+            border: 1px solid #ddd;
+            border-radius: 10px;
+            font-size: 16px;
+        }
+
+        button {
+            width: 100%;
+            padding: 14px;
+            border: none;
+            border-radius: 10px;
+            background: #222;
+            color: white;
+            font-size: 16px;
+            cursor: pointer;
+        }
+
+        button:disabled {
+            opacity: 0.6;
+        }
+
+        .back {
+            display: block;
+            text-align: center;
+            margin-top: 20px;
+            color: #666;
+            text-decoration: none;
+        }
+
+        #pesan {
+            margin-top: 15px;
+            text-align: center;
+            font-size: 14px;
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+    <div class="login-box">
+
+        <h1>MONEYA</h1>
+
+        <p class="subtitle">
+            Masuk ke akunmu
+        </p>
+
+
+        <form id="formLogin">
+
+            <label for="email">
+                Email
+            </label>
+
+            <input
+                type="email"
+                id="email"
+                placeholder="Masukkan email"
+                required
+            >
+
+
+            <label for="password">
+                Password
+            </label>
+
+            <input
+                type="password"
+                id="password"
+                placeholder="Masukkan password"
+                required
+            >
+
+
+            <button
+                type="submit"
+                id="tombolLogin">
+
+                Login
+
+            </button>
+
+        </form>
+
+
+        <p id="pesan"></p>
+
+
+        <a href="daftar.html" class="back">
+            Belum punya akun? Daftar
+        </a>
+
+
+        <a href="index.html" class="back">
+            ← Kembali
+        </a>
+
+    </div>
+
+
+    <!-- FIREBASE -->
+
+    <script type="module">
+
+        import {
+            initializeApp
+        } from "https://www.gstatic.com/firebasejs/12.18.0/firebase-app.js";
+
+
+        import {
+            getAuth,
+            signInWithEmailAndPassword
+        } from "https://www.gstatic.com/firebasejs/12.18.0/firebase-auth.js";
+
+
+        /* =========================
+           FIREBASE CONFIG
+        ========================= */
+
+        const firebaseConfig = {
+
+            apiKey: "AIzaSyCNv4-7NC8n-voTkDGU--6O2VL9ZrDTByM",
+
+            authDomain:
+                "moneya-b1511.firebaseapp.com",
+
+            projectId:
+                "moneya-b1511",
+
+            storageBucket:
+                "moneya-b1511.firebasestorage.app",
+
+            messagingSenderId:
+                "325690102280",
+
+            appId:
+                "1:325690102280:web:67f978a652b25444a1f7bd"
+
+        };
+
+
+        /* =========================
+           HUBUNGKAN FIREBASE
+        ========================= */
+
+        const app =
+            initializeApp(firebaseConfig);
+
+
+        const auth =
+            getAuth(app);
+
+
+        /* =========================
+           FORM LOGIN
+        ========================= */
+
+        const formLogin =
+            document.getElementById(
+                "formLogin"
+            );
+
+
+        const pesan =
+            document.getElementById(
+                "pesan"
+            );
+
+
+        const tombolLogin =
+            document.getElementById(
+                "tombolLogin"
+            );
+
+
+        formLogin.addEventListener(
+            "submit",
+            async function(event) {
+
+                event.preventDefault();
+
+
+                const email =
+                    document
+                    .getElementById("email")
+                    .value
+                    .trim();
+
+
+                const password =
+                    document
+                    .getElementById("password")
+                    .value;
+
+
+                tombolLogin.disabled = true;
+
+                tombolLogin.textContent =
+                    "Memeriksa...";
+
+
+                try {
+
+                    /* LOGIN */
+
+                    await signInWithEmailAndPassword(
+                        auth,
+                        email,
+                        password
+                    );
+
+
+                    pesan.textContent =
+                        "Login berhasil!";
+
+
+                    /* MASUK DASHBOARD */
+
+                    window.location.href =
+                        "dashboard.html";
+
+
+                } catch (error) {
+
+                    tombolLogin.disabled =
+                        false;
+
+                    tombolLogin.textContent =
+                        "Login";
+
+
+                    if (
+                        error.code ===
+                        "auth/invalid-credential"
+                    ) {
+
+                        pesan.textContent =
+                            "Email atau password salah.";
+
+                    } else if (
+                        error.code ===
+                        "auth/invalid-email"
+                    ) {
+
+                        pesan.textContent =
+                            "Format email tidak valid.";
+
+                    } else {
+
+                        pesan.textContent =
+                            "Login gagal: " +
+                            error.message;
+
+                    }
+
+                }
+
+            }
+        );
+
+    </script>
+
+</body>
+
+</html>

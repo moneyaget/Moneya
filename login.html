@@ -209,7 +209,12 @@
 
 
         const auth =
-            getAuth(app);
+    getAuth(app);
+
+await setPersistence(
+    auth,
+    browserLocalPersistence
+);
 
 
         /* =========================

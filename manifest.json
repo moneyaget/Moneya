@@ -1,0 +1,17 @@
+{
+  "name": "MONEYA",
+  "short_name": "MONEYA",
+  "description": "Pencatatan keuangan pribadi",
+  "start_url": "./index.html",
+  "display": "standalone",
+  "background_color": "#101827",
+  "theme_color": "#3867d6",
+  "icons": [
+    {
+      "src": "logo-moneya.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ]
+}

@@ -5,6 +5,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
+    <link rel="icon" type="image/png" href="./logo-moneya.png">
+    <link rel="manifest" href="./manifest.json">
+    <meta name="theme-color" content="#3867d6">
+
     <title>Login - MONEYA</title>
 
     <style>
@@ -167,11 +171,12 @@
 
 
         import {
-    getAuth,
-    setPersistence,
-    browserLocalPersistence,
-    signInWithEmailAndPassword
-} from "https://www.gstatic.com/firebasejs/12.18.0/firebase-auth.js";
+            getAuth,
+            setPersistence,
+            browserLocalPersistence,
+            onAuthStateChanged,
+            signInWithEmailAndPassword
+        } from "https://www.gstatic.com/firebasejs/12.18.0/firebase-auth.js";
 
 
         /* =========================
@@ -209,12 +214,26 @@
 
 
         const auth =
-    getAuth(app);
+            getAuth(app);
 
-await setPersistence(
-    auth,
-    browserLocalPersistence
-);
+
+        /* =========================
+           CEK SESI YANG SUDAH ADA
+           ========================= */
+
+        onAuthStateChanged(
+            auth,
+            function(user) {
+
+                if (user) {
+
+                    window.location.href =
+                        "dashboard.html";
+
+                }
+
+            }
+        );
 
 
         /* =========================
@@ -266,6 +285,17 @@ await setPersistence(
 
 
                 try {
+
+                    /*
+                       SIMPAN SESI LOGIN
+                       DI PERANGKAT
+                    */
+
+                    await setPersistence(
+                        auth,
+                        browserLocalPersistence
+                    );
+
 
                     /* LOGIN */
 

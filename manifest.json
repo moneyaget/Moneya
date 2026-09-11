@@ -2,7 +2,7 @@
   "name": "MONEYA",
   "short_name": "MONEYA",
   "description": "Pencatatan keuangan pribadi",
-  "start_url": "./index.html",
+  "start_url": "./dashboard.html",
   "scope": "./",
   "display": "standalone",
   "background_color": "#101827",
